@@ -105,6 +105,7 @@ public class Main {
                 break;
             case "7":
                 empresaBean.getEmpresas("Todo", "").forEach(Main::printEmpresa);
+                break;
             default:
                 System.out.println("input incorrecto");
         }
