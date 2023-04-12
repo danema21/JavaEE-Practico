@@ -1,0 +1,8 @@
+org\example\Main.class
+org\example\model\Empresa.class
+org\example\beans\MySingleton.class
+org\example\beans\MySingletonLocal.class
+org\example\beans\MySingletonRemote.class
+org\example\EmprRemote.class
+org\example\Empr.class
+org\example\EmprLocal.class
