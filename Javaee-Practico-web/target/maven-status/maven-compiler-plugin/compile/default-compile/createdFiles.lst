@@ -1,3 +1,4 @@
 org\example\ListarEmpresas.class
 org\example\AgregarEmpresa.class
 org\example\EliminarEmpresa.class
+org\example\NewIndexHandler.class
