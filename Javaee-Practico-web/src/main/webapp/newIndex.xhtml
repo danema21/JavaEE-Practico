@@ -15,54 +15,64 @@
         <p:card styleClass="flex justify-content-center">
             <h2 class="text-center">EMPRESAS</h2>
             <h:form>
-                <div class="field grid">
-                    <h:outputLabel for="razonsocial" class="col-12 mb-2 md:col-4 md:mb-0">Razon Social</h:outputLabel>
-                    <div class="col-12 md:col-8">
-                        <h:inputText id="razonsocial" value="#{newIndexHandler.razonSocial}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La razon social es requerida"/>
+                <div class="w-fit m-auto mb-4">
+                    <div class="field grid">
+                        <h:outputLabel for="razonsocial" class="col-12 mb-2 md:col-4 md:mb-0">Razon Social</h:outputLabel>
+                        <div class="col-12 md:col-8">
+                            <h:inputText id="razonsocial" value="#{newIndexHandler.razonSocial}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La razon social es requerida"/>
+                        </div>
+                    </div>
+                    <div class="field grid">
+                        <h:outputLabel for="nombrepublico" class="col-12 mb-2 md:col-4 md:mb-0">Nombre Publico</h:outputLabel>
+                        <div class="col-12 md:col-8">
+                            <h:inputText id="nombrepublico" value="#{newIndexHandler.nombrePublico}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El nombre publico es requerido"/>
+                        </div>
+                    </div>
+                    <div class="field grid">
+                        <h:outputLabel for="direccion" class="col-12 mb-2 md:col-4 md:mb-0">Direccion</h:outputLabel>
+                        <div class="col-12 md:col-8">
+                            <h:inputText id="direccion" value="#{newIndexHandler.direccion}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La direccion es requerida"/>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p:commandButton value="Crear" action="#{newIndexHandler.agregarEmpresa()}" update="table" class="text-white bg-primary-500 border-primary-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700"/>
                     </div>
                 </div>
 
-                <div class="field grid">
-                    <h:outputLabel for="nombrepublico" class="col-12 mb-2 md:col-4 md:mb-0">Nombre Publico</h:outputLabel>
-                    <div class="col-12 md:col-8">
-                        <h:inputText id="nombrepublico" value="#{newIndexHandler.nombrePublico}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El nombre publico es requerido"/>
-                    </div>
-                </div>
+                <p:dataTable id="table"
+                             var="empresa"
+                             value="#{newIndexHandler.empresas}">
+                    <f:facet name="header">
+                        <div class="flex justify-content-end">
+                            <p:inputText id="globalFilter" style="width:300px" placeholder="Buscar..." value="#{newIndexHandler.buscar}"/>
+                            <p:commandButton value="IR" action="#{newIndexHandler.listarEmpresas()}" update="table"/>
+                        </div>
+                    </f:facet>
 
-                <div class="field grid">
-                    <h:outputLabel for="direccion" class="col-12 mb-2 md:col-4 md:mb-0">Direccion</h:outputLabel>
-                    <div class="col-12 md:col-8">
-                        <h:inputText id="direccion" value="#{newIndexHandler.direccion}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La direccion es requerida"/>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <p:commandButton value="Crear" action="#{newIndexHandler.agregarEmpresa()}" class="text-white bg-primary-500 border-primary-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700"/>
-                </div>
-            </h:form>
-        </p:card>
+                    <p:column headerText="Nro">
+                        <h:outputText value="#{empresa.nroEmpresa}" />
+                    </p:column>
+                    <p:column headerText="Razon Social">
+                        <h:outputText value="#{empresa.razonSocial}" />
+                    </p:column>
+                    <p:column headerText="Nombre Publico">
+                        <h:outputText value="#{empresa.nombrePublico}" />
+                    </p:column>
+                    <p:column headerText="Direccion">
+                        <h:outputText value="#{empresa.direccion}" />
+                    </p:column>
+                    <p:column headerText="Fecha de Creacion">
+                        <h:outputText value="#{empresa.fechaCreacion}" />
+                    </p:column>
 
-        <p:card styleClass="flex justify-content-center">
-            <h:form>
-                <div class="ui-input-icon-left text-center">
-                    <i class="pi pi-search" />
-                    <p:inputText placeholder="Buscar..." value="#{newIndexHandler.buscar}"/>
-                    <p:commandButton value="busar" action="#{newIndexHandler.listarEmpresas()}"/>
-                </div>
-                <p:dataView var="empresa" value="#{newIndexHandler.empresas}">
-                    <p:dataViewListItem>
-                            <div>
-                                <h4>#{empresa.razonSocial}</h4>
-                                <h5>#{empresa.nombrePublico}</h5>
-                                <p>#{empresa.direccion}</p>
-                                <br/>
-                                <small>NRO: #{empresa.nroEmpresa}</small>
-                                <small>#{empresa.fechaCreacion}</small>
-                            </div>
-                            <div>
-                                <p:commandButton value="Borrar" action="#{newIndexHandler.borrarEmpresa()}"/>
-                            </div>
-                    </p:dataViewListItem>
-                </p:dataView>
+                    <p:column exportable="false">
+                        <p:commandButton styleClass="rounded-button ui-button-danger" icon="pi pi-trash"
+                                         process="@this"
+                                         action="#{newIndexHandler.borrarEmpresa(empresa.nroEmpresa)}"
+                                         update="table"
+                        />
+                    </p:column>
+                </p:dataTable>
             </h:form>
         </p:card>
     </f:view>

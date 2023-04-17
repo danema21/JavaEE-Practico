@@ -16,7 +16,7 @@ public class NewIndexHandler implements Serializable {
     private String razonSocial;
     private String nombrePublico;
     private String direccion;
-    private String buscar;
+    private String buscar = "";
     private long nroEmpresa;
     private List<Empresa> empresas = new ArrayList<>();
 
@@ -26,15 +26,16 @@ public class NewIndexHandler implements Serializable {
     public NewIndexHandler(){}
 
     public void agregarEmpresa(){
-        empresaBean.agregar(razonSocial, nombrePublico, direccion);
+        empresas.add(empresaBean.agregar(razonSocial, nombrePublico, direccion));
     }
 
     public void listarEmpresas(){
-        empresas = empresaBean.getEmpresas("Todos los campos", buscar);
+        empresas = (buscar.isEmpty()) ? empresaBean.getEmpresas("", "") : empresaBean.getEmpresas("Todos los campos", buscar);
     }
 
-    public void borrarEmpresa(){
+    public void borrarEmpresa(long nroEmpresa){
         empresaBean.eliminarEmpresa(nroEmpresa);
+        listarEmpresas();
     }
 
     public String getRazonSocial() {

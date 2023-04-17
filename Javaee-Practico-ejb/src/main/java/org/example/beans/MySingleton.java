@@ -16,12 +16,13 @@ public class MySingleton implements MySingletonLocal, MySingletonRemote{
     long nroEmpresa = 0;
     public MySingleton(){}
     @Override
-    public void agregar(String razonSocial, String nombrePublico, String direccion){
+    public Empresa agregar(String razonSocial, String nombrePublico, String direccion){
         Empresa empresa = new Empresa(razonSocial,nombrePublico,direccion);
         empresa.setFechaCreacion(LocalDateTime.now());
         nroEmpresa += 1;
         empresa.setNroEmpresa(nroEmpresa);
         empresas.add(empresa);
+        return empresa;
     }
     @Override
     public List<Empresa> getEmpresas(String filtro, String valor){
@@ -35,7 +36,7 @@ public class MySingleton implements MySingletonLocal, MySingletonRemote{
                     info.set(info.get().concat(empresa.getNombrePublico()));
                     info.set(info.get().concat(empresa.getDireccion()));
                     info.set(info.get().concat(empresa.getFechaCreacion().toString()));
-                    return info.get().contains(valor);
+                    return info.get().toLowerCase().contains(valor.toLowerCase());
                 }).collect(Collectors.toList());
             case "Nro":
                 return empresas.stream().filter(empresa -> empresa.getNroEmpresa() == Long.parseLong(valor)).collect(Collectors.toList());
@@ -47,10 +48,8 @@ public class MySingleton implements MySingletonLocal, MySingletonRemote{
                 return empresas.stream().filter(empresa -> empresa.getDireccion().contains(valor)).collect(Collectors.toList());
             case "Fecha":
                 return empresas.stream().filter(empresa -> empresa.getFechaCreacion().toString().contains(valor)).collect(Collectors.toList());
-            case "Todo":
-                return empresas;
             default:
-                throw new RuntimeException();
+                return empresas;
         }
     }
 

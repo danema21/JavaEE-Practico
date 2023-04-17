@@ -5,7 +5,6 @@ import jakarta.ejb.Local;
 import jakarta.ejb.Remote;
 import jakarta.ejb.Stateless;
 import org.example.beans.MySingletonLocal;
-import org.example.beans.MySingletonRemote;
 import org.example.model.Empresa;
 
 import java.util.List;
@@ -19,8 +18,8 @@ public class Empr implements EmprLocal, EmprRemote{
     public Empr() {
     }
     @Override
-    public void agregar(String razonSocial, String nombrePublico, String direccion) {
-        singleton.agregar(razonSocial, nombrePublico, direccion);
+    public Empresa agregar(String razonSocial, String nombrePublico, String direccion) {
+        return singleton.agregar(razonSocial, nombrePublico, direccion);
     }
     @Override
     public List<Empresa> getEmpresas(String filtro, String valor) {
