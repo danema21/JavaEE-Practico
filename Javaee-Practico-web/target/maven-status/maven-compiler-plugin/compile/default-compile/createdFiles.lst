@@ -1,3 +1,8 @@
+org\example\HelloWorldMDBServletClient.class
+org\example\RestApplication.class
+org\example\EmpresaRest.class
+org\example\EmpresaSoap.class
+org\example\AgregarEmpresaMDBServletClient.class
 org\example\ListarEmpresas.class
 org\example\AgregarEmpresa.class
 org\example\EliminarEmpresa.class

@@ -39,5 +39,11 @@
     <input type="text" name="filtro" placeholder="buscar..."/>
     <button type="submit">filtrar</button>
 </form>
+
+<form action="agregar-empresa-mdb" method="post">
+    <label for="msj">Agregar Empresa mediante mensaje jms: </label>
+    <input id="msj" type="text" name="mensaje" placeholder="escriba los atributos de la empresa separados por |..."/>
+    <button type="submit">mandar mensaje</button>
+</form>
 </body>
 </html>
