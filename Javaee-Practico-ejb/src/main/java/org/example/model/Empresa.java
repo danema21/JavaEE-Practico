@@ -1,11 +1,20 @@
 package org.example.model;
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Entity
 public class Empresa implements Serializable {
     public static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue
+    private Long id;
     long nroEmpresa;
     String razonSocial;
     String nombrePublico;

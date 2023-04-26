@@ -1,6 +1,7 @@
 package org.example.beans;
 
 import jakarta.ejb.Singleton;
+import jakarta.persistence.*;
 import org.example.model.Empresa;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,9 @@ import java.util.stream.Collectors;
 public class MySingleton implements MySingletonLocal, MySingletonRemote{
     List<Empresa> empresas = new ArrayList<>();
     long nroEmpresa = 0;
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("PostgresDS");
+    EntityManager em = factory.createEntityManager();
+    EntityTransaction tx = em.getTransaction();
     public MySingleton(){}
     @Override
     public Empresa agregar(String razonSocial, String nombrePublico, String direccion){
@@ -22,6 +26,17 @@ public class MySingleton implements MySingletonLocal, MySingletonRemote{
         nroEmpresa += 1;
         empresa.setNroEmpresa(nroEmpresa);
         empresas.add(empresa);
+
+        tx.begin();
+        try {
+            em.persist(empresa);
+            tx.commit();
+            System.out.println("DEBUG: llego al final del try");
+        }catch (Exception e){
+            e.printStackTrace();
+            tx.rollback();
+        }
+        System.out.println("DEBUG: salio del try");
         return empresa;
     }
     @Override
